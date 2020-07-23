@@ -6,10 +6,10 @@ from datetime import datetime
 
 app = Flask(__name__)
 # Init Sql 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db' #sqlite
-# db_connetion = 'postgresql://localhost/flask_blog' #postgres
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db' #sqlite
+db_connetion = 'postgres://localhost:5432/flask_blog' #postgres
 # db_connetion = 'mysql+pymysql:///flask_blog?unix_socket=/opt/mysql/mysql.sock'
-# app.config['SQLALCHEMY_DATABASE_URI'] = db_connetion
+app.config['SQLALCHEMY_DATABASE_URI'] = db_connetion
 
 db = SQLAlchemy(app)
 
@@ -22,8 +22,6 @@ class BlogPost(db.Model):
 
      def __repr__(self):
          return 'Blog Post ' + str(self.id)
-
-db.create_all()
 
 
 @app.route('/')
