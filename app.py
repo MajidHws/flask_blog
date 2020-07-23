@@ -6,11 +6,11 @@ from datetime import datetime
 
 app = Flask(__name__)
 # Init Sql 
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
-db_connetion = 'mysql+pymysql://root:root@localhost:3306/flask_blog'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db' #sqlite
+# db_connetion = 'postgresql://localhost/postgres' #postgres
 # db_connetion = 'mysql+pymysql:///flask_blog?unix_socket=/opt/mysql/mysql.sock'
-app.config['SQLALCHEMY_DATABASE_URI'] = db_connetion
-#'localhost:/Applications/MAMP/tmp/mysql/mysql.sock'
+# app.config['SQLALCHEMY_DATABASE_URI'] = db_connetion
+
 db = SQLAlchemy(app)
 
 class BlogPost(db.Model):
@@ -35,7 +35,7 @@ def posts():
         post_title = request.form['title']
         post_content = request.form['content']
         post_author = request.form['author']
-        new_post = BlogPost(title=post_title, content=post_content, author='ME')
+        new_post = BlogPost(title=post_title, content=post_content, author=post_author)
         db.session.add(new_post)
         db.session.commit()
         return redirect('/posts')
