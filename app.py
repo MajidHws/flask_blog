@@ -6,7 +6,11 @@ from datetime import datetime
 
 app = Flask(__name__)
 # Init Sql 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
+db_connetion = 'mysql+pymysql://root:root@localhost:3306/flask_blog'
+# db_connetion = 'mysql+pymysql:///flask_blog?unix_socket=/opt/mysql/mysql.sock'
+app.config['SQLALCHEMY_DATABASE_URI'] = db_connetion
+#'localhost:/Applications/MAMP/tmp/mysql/mysql.sock'
 db = SQLAlchemy(app)
 
 class BlogPost(db.Model):
